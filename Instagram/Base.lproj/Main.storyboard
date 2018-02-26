@@ -96,6 +96,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="captionLabel" destination="K8y-21-o2N" id="rvT-G6-Waf"/>
                                             <outlet property="photoView" destination="CXg-N7-sCh" id="8nm-9u-cwq"/>
                                         </connections>
                                     </tableViewCell>
@@ -166,7 +167,11 @@
                         <viewLayoutGuide key="safeArea" id="YNq-zH-hOl"/>
                     </view>
                     <navigationItem key="navigationItem" title="Compose Image" id="Vab-Aj-c85">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="uHV-z8-cJZ"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="uHV-z8-cJZ">
+                            <connections>
+                                <action selector="onTapCancel:" destination="F1h-hH-djU" id="65v-k6-1In"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Share" id="Pas-PY-UeV">
                             <connections>
                                 <action selector="onTapShare:" destination="F1h-hH-djU" id="NOP-0a-mTF"/>

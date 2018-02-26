@@ -12,35 +12,57 @@ import ParseUI
 class MainPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    var posts: [PFObject]!
+    var refreshControl = UIRefreshControl()
+    var remotePosts: [PFObject] = []
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector (MainPageViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = 316
         
         // Do any additional setup after loading the view.
-        // construct PFQuery
-        let query = Post.query()
-        query?.order(byDescending: "createdAt")
-        query?.includeKey("author")
-        query?.limit = 20
+
+        // fetch data asynchronously
+        makeRequest()
+        
+    }
+    
+    func makeRequest(){
+        let query = PFQuery(className: "Post")
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        query.limit = 20
         
         // fetch data asynchronously
-        query?.findObjectsInBackground { (remotePosts: [PFObject]?, error: Error?) -> Void in
-            if let remotePosts = remotePosts {
-                // do something with the data fetched
-                print("Getting all the posts.")
-                self.posts = remotePosts
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
+            if error == nil {
+                // The find succeeded.
+                print("Successfully retrieved \(posts!.count) scores.")
+                // Do something with the found objects
+                self.remotePosts = posts!
+                if posts != nil {
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                    
+                }
             } else {
-                // handle error
-                print(error?.localizedDescription as Any)
+                // Log details of the failure
+                print("Error: \(String(describing: error?.localizedDescription))")
             }
-            }
+        }
+    }
+    
+    @objc
+    func didPullToRefresh(_ refreshControl: UIRefreshControl){
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Fetching User Storeis ... ")
+        makeRequest()
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,15 +76,16 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return remotePosts.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostViewCell
-        
-        cell.instagramPost = posts[indexPath.row]
+        cell.instagramPost = remotePosts[indexPath.row]
+        cell.captionLabel.text = remotePosts[indexPath.row]["caption"] as? String
         return cell
     }
+    
     
     
     /*

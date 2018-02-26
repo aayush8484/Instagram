@@ -15,9 +15,10 @@ class PostViewCell: UITableViewCell {
 
     @IBOutlet weak var photoView: PFImageView!
     
+    @IBOutlet weak var captionLabel: UILabel!
     var instagramPost: PFObject! {
         didSet {
-            self.photoView.file = instagramPost["image"] as? PFFile
+            self.photoView.file = instagramPost["media"] as? PFFile
             self.photoView.loadInBackground()
         }
     }
@@ -25,6 +26,7 @@ class PostViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        // captionLabel.text = instagramPost["caption"] as? String
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -96,12 +96,21 @@ class ComposeImageViewController: UIViewController, UIImagePickerControllerDeleg
         self.present(vc, animated: true, completion: nil)
     }
     
+    
+    @IBAction func onTapCancel(_ sender: Any) {
+        self.sendHome()
+    }
     @IBAction func onTapShare(_ sender: Any) {
         Post.postUserImage(image: postImage, withCaption: captionLabel.text) { (success: Bool, error: Error?) in
             print("Posted the User Image.")
+            // TODO: Create an alert and send the user to the home page.
+          self.sendHome()
         }
     }
     
+    func sendHome(){
+          NotificationCenter.default.post(name: NSNotification.Name("didShare"), object: nil)
+    }
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {

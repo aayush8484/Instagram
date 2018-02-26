@@ -44,6 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
         
+        NotificationCenter.default.addObserver(forName: Notification.Name("didShare"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Photo Shared notification received")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "AuthenticatedViewController") as UIViewController
+            self.window?.rootViewController = mainPageViewController
+        }
+        
         // Check if the user is logged in.
 //        if PFUser.current() != nil {
 //            print("pre existing user.")
