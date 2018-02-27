@@ -38,6 +38,7 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         let query = PFQuery(className: "Post")
         query.order(byDescending: "createdAt")
         query.includeKey("author")
+        query.includeKey("media")
         query.limit = 20
         
         // fetch data asynchronously
@@ -86,6 +87,14 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell){
+            let post = remotePosts[indexPath.row]
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.post = post
+        }
+    }
     
     
     /*

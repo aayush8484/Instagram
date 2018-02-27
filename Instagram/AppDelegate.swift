@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(forName: Notification.Name("didShare"), object: nil, queue: OperationQueue.main) { (Notification) in
             print("Photo Shared notification received")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "AuthenticatedViewController") as UIViewController
+            let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "loggedInViewController") as UIViewController
             self.window?.rootViewController = mainPageViewController
         }
         

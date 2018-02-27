@@ -89,6 +89,62 @@
       "idiom" : "ios-marketing",
       "size" : "1024x1024",
       "scale" : "1x"
+    },
+    {
+      "filename" : "feed_tab.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "feed_tab@2x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "feed_tab@3x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "Icon-60@2x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "Icon-60@3x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "image_placeholder.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "image_placeholder@2x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "image_placeholder@3x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "insta_camera_btn.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "insta_camera_btn@2x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "insta_camera_btn@3x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "profile_tab.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "profile_tab@2x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "profile_tab@3x.png",
+      "unassigned" : true
     }
   ],
   "info" : {
