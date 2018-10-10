@@ -63,7 +63,7 @@ I had difficulty arranging all the view controllers and the segues. In addition,
 
 ## License
 
-Copyright [2018] [Aayush Gupta]
+Copyright [2018] [Norah Nwaneri]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
